@@ -1,0 +1,27 @@
+.home {
+  width: 100%;
+  height: 100%;
+  background: whitesmoke;
+  box-sizing: border-box;
+  padding: 100px 30% 50px 30%;
+  overflow: scroll;
+  font-family: "Menlo", "Meslo LG", "Microsoft Yahei", monospace;
+  font-weight: 100;
+}
+
+.header {
+  color: #ccc;
+  font-size: 24px;
+  margin-bottom: 45px;
+}
+
+.sketch-link {
+  color: #aaa;
+  font-size: 17px;
+  display: block;
+  margin-top: 24px;
+}
+
+.sketch-link:visited {
+  color: #aaa;
+}
