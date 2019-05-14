@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/shadow-and-the-dancer/static/css/main.6da18f89.chunk.css",
+    "main.js": "/shadow-and-the-dancer/static/js/main.ba4059b3.chunk.js",
+    "main.js.map": "/shadow-and-the-dancer/static/js/main.ba4059b3.chunk.js.map",
+    "runtime~main.js": "/shadow-and-the-dancer/static/js/runtime~main.c3e9552e.js",
+    "runtime~main.js.map": "/shadow-and-the-dancer/static/js/runtime~main.c3e9552e.js.map",
+    "static/js/2.2f2b22ab.chunk.js": "/shadow-and-the-dancer/static/js/2.2f2b22ab.chunk.js",
+    "static/js/2.2f2b22ab.chunk.js.map": "/shadow-and-the-dancer/static/js/2.2f2b22ab.chunk.js.map",
+    "index.html": "/shadow-and-the-dancer/index.html",
+    "precache-manifest.8fe981d6f8859a9464bfa4c7be202522.js": "/shadow-and-the-dancer/precache-manifest.8fe981d6f8859a9464bfa4c7be202522.js",
+    "service-worker.js": "/shadow-and-the-dancer/service-worker.js",
+    "static/css/main.6da18f89.chunk.css.map": "/shadow-and-the-dancer/static/css/main.6da18f89.chunk.css.map"
+  }
+}
