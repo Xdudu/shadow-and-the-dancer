@@ -11,19 +11,23 @@ const roundCntToComplete = getRoundCntToComplete(R, r)
 export default {
   width,
   height,
-  canvasBias: [ width * 0.48, height * 0.48 ],
-  speed: 0.6,
-  drawMethod: 'line',
   bg: '#962e1a',
-  roundCnt: roundCntToComplete * 1,
-  params: {
-    R,
-    r,
-    seriesCnt: 300,
-    seriesAngBias: Math.PI * 2,
-    drawDisRange: [ 0.85, 2.5 ],
-    totalTranslate: [ 50, 50 ],
-    rgb: [ 231, 163, 67 ],
-    alpha: [ 0.22, 0.001 ],
-  },
+  drawList: [
+    {
+      R,
+      r,
+      canvasBias: [ width * 0.48, height * 0.48 ],
+      speed: 0.6,
+      drawMethod: {
+        type: 'line',
+      },
+      roundCnt: roundCntToComplete * 1,
+      seriesCnt: 300,
+      seriesAngBias: Math.PI * 2,
+      drawDisRange: [ 0.85, 2.5 ],
+      totalTranslate: [ 50, 50 ],
+      rgb: [ 231, 163, 67 ],
+      alpha: [ 0.22, 0.001 ],
+    },
+  ]
 }

@@ -14,6 +14,7 @@ export default class Home extends React.Component {
         <Link className="sketch-link" to="/rose-hand">#3</Link>
         <Link className="sketch-link" to="/sun-grows">#4</Link>
         <Link className="sketch-link" to="/jelly-fish">#5</Link>
+        <Link className="sketch-link" to="/variation">#6</Link>
         {/* <Link className="sketch-link" to="/eeeee">#eeeee</Link> */}
       </div>
     )

@@ -39,48 +39,59 @@ export default class Canvas extends React.Component {
     return sketchParams[sketchName] || {}
   }
 
+  getDrawParams = () => this.getParams().drawList || []
+
   draw = () => {
-    const { params: paramsForDraw, canvasBias, speed, drawMethod, roundCnt } = this.getParams()
-    if (!paramsForDraw) return
+    let hasNextDraw = true
 
-    if (!this.$canvas) return
-    const context = this.$canvas.getContext('2d')
-    context.fillStyle = 'none'
+    this.getDrawParams().forEach(
+      ({ canvasBias, speed, drawMethod, roundCnt, ...paramsForDraw }, drawIndex) => {
+        if (!paramsForDraw) return
 
-    const time = (Date.now() - this.startAt) / 1000
-    if (time * speed / (2 * Math.PI) > roundCnt) return // complete
+        if (!this.$canvas) return
+        const context = this.$canvas.getContext('2d')
+        context.fillStyle = 'none'
 
-    const { R, r } = paramsForDraw
-    const dataForDraw = getDataForDraw(paramsForDraw)
-    dataForDraw.forEach((data, dataIndex) => {
-      const { translate, color, initialDrawPoint } = data
-      const lastDrawPoint = this.lastDrawPointSeries[dataIndex] || initialDrawPoint
+        const time = (Date.now() - this.startAt) / 1000
+        if (time * speed / (2 * Math.PI) > roundCnt) return hasNextDraw = false// complete
 
-      context.resetTransform()
-      context.translate(...canvasBias)
+        const { R, r } = paramsForDraw
+        const dataForDraw = getDataForDraw(paramsForDraw)
+        dataForDraw.forEach((data, dataIndex) => {
+          const { translate, color, initialDrawPoint } = data
+          if (!this.lastDrawPointSeries[drawIndex]) this.lastDrawPointSeries[drawIndex] = []
+          const lastDrawPoint = this.lastDrawPointSeries[drawIndex][dataIndex] || initialDrawPoint
 
-      const drawPoint = getDrawPoint(R, r, data, speed, time)
+          context.resetTransform()
+          context.translate(...canvasBias)
 
-      context.translate(...translate)
+          const drawPoint = getDrawPoint(R, r, data, speed, time)
 
-      if (drawMethod === 'line') {
-        // lines
-        context.beginPath()
-        context.strokeStyle = color
-        context.moveTo(...lastDrawPoint)
-        context.lineTo(...drawPoint)
-        context.stroke()
-      } else if (drawMethod === 'point') {
-        // dashes
-        context.beginPath()
-        context.fillStyle = color
-        context.ellipse(...drawPoint, 1, 1, 0, 0, 2 * Math.PI)
-        context.fill()
+          context.translate(...translate)
+
+          if (drawMethod.type === 'line') {
+            // lines
+            context.lineWidth = drawMethod.weight
+            context.beginPath()
+            context.strokeStyle = color
+            context.moveTo(...lastDrawPoint)
+            context.lineTo(...drawPoint)
+            context.stroke()
+          } else if (drawMethod.type === 'point') {
+            // dashes
+            context.beginPath()
+            context.fillStyle = color
+            context.ellipse(...drawPoint, 1, 1, 0, 0, 2 * Math.PI)
+            context.fill()
+          }
+
+          this.lastDrawPointSeries[drawIndex][dataIndex] = drawPoint
+          if (dataIndex === dataForDraw.length - 1) context.closePath()
+        })
       }
+    )
 
-      this.lastDrawPointSeries[dataIndex] = drawPoint
-    })
-    requestAnimationFrame(this.draw)
+    if (hasNextDraw) requestAnimationFrame(this.draw)
   }
 
   render() {
