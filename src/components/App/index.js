@@ -4,7 +4,7 @@ import { HashRouter as Router, Route } from 'react-router-dom'
 import './index.css'
 
 import Home from '../Home'
-import Canvas from '../Canvas'
+import Sketch from '../Sketch'
 
 export default class App extends React.Component {
   render() {
@@ -12,7 +12,7 @@ export default class App extends React.Component {
       <Router>
         <div className="App">
           <Route exact path="/" component={Home} />
-          <Route path="/:sketchName" component={Canvas} />
+          <Route path="/:sketchName" component={Sketch} />
         </div>
       </Router>
     )

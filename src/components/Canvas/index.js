@@ -1,7 +1,5 @@
 import React from 'react'
 
-import * as sketchParams from '../../sketch-params'
-
 import { getDataForDraw, getDrawPoint } from './utils'
 import './index.css'
 
@@ -34,12 +32,7 @@ export default class Canvas extends React.Component {
     this.$canvas.style.width = Math.min(containerWidth, containerHeight) + 'px'
   }
 
-  getParams = () => {
-    const sketchName = this.props.match.params.sketchName.replace(/-./gm, str => str[1].toUpperCase())
-    return sketchParams[sketchName] || {}
-  }
-
-  getDrawParams = () => this.getParams().drawList || []
+  getDrawParams = () => this.props.params.drawList || []
 
   draw = () => {
     let hasNextDraw = true
@@ -95,7 +88,7 @@ export default class Canvas extends React.Component {
   }
 
   render() {
-    const { width, height, bg } = this.getParams()
+    const { width, height, bg } = this.props.params
     return (
       <div
         className="canvas-container"

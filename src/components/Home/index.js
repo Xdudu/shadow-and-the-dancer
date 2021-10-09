@@ -6,6 +6,7 @@ import './index.css'
 
 export default class Home extends React.Component {
   render() {
+    const renderDevSketch = process.env.NODE_ENV === 'development'
     return (
       <div className="home">
         <header className="header">Shadow and the Dancer</header>
@@ -15,7 +16,7 @@ export default class Home extends React.Component {
         <Link className="sketch-link" to="/sun-grows">#4</Link>
         <Link className="sketch-link" to="/jelly-fish">#5</Link>
         <Link className="sketch-link" to="/variation">#6</Link>
-        {/* <Link className="sketch-link" to="/eeeee">#eeeee</Link> */}
+        { renderDevSketch && <Link className="sketch-link" to="/dev">#dev</Link> }
       </div>
     )
   }
